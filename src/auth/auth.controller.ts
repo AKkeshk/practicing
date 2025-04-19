@@ -44,7 +44,9 @@ export class AuthController {
     }
 
     const response = await this.authService.loginWithGoogle(req.user.sub);
-    return res.redirect(`http://localhost:3000?token=${response.access_token}`);
+    return res.redirect(
+      `https://practicing-x8va.onrender.com?token=${response.access_token}`,
+    );
   }
   @Get('facebook/login')
   @UseGuards(FacebookGuard)
@@ -61,6 +63,8 @@ export class AuthController {
     }
 
     const response = await this.authService.loginWithGoogle(req.user.sub);
-    return res.redirect(`http://localhost:3000?token=${response.access_token}`);
+    return res.redirect(
+      `https://practicing-x8va.onrender.com?token=${response.access_token}`,
+    );
   }
 }
