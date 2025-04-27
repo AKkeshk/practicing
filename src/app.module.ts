@@ -5,17 +5,23 @@ import { AppService } from './app.service';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { User } from './schemas/userSchema';
+import { AdminController } from './admin/admin.controller';
+import { AdminModule } from './admin/admin.module';
+import { ConfigModule } from '@nestjs/config';
+import { Item } from './schemas/itemSchema';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'mongodb', // Specify MongoDB as the database type
       url: 'mongodb+srv://practicingNestJS:practicingNestJS@practicingnestjs.vvbui13.mongodb.net/?retryWrites=true&w=majority&appName=practicingNestJS', // MongoDB URI
       synchronize: true, // Automatically sync database schema on every application launch (use with caution in production)
 
-      entities: [User], // Register entities here
+      entities: [User, Item], // Register entities here
     }),
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

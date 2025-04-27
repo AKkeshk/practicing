@@ -16,7 +16,7 @@ import facebookOauthConfig from './config/facebook.oauth.config';
     ConfigModule.forFeature(facebookOauthConfig), // Loads your custom config
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
-      secret: 'your_secret_key',
+      secret: 'shadowsector1',
       signOptions: { expiresIn: '1h' },
     }),
   ],

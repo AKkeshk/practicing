@@ -36,9 +36,6 @@ export class AuthController {
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
   async googleCallback(@Req() req, @Res() res) {
-    console.log('🎯 Callback route hit');
-    console.log('👤 req.user:', req.user); // Should NOT be undefined
-
     if (!req.user) {
       return res.status(400).send('User not authenticated');
     }
