@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { MongoRepository } from 'typeorm';
+import { MongoRepository, ObjectId } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Item } from 'src/schemas/itemSchema';
 import { itemDTO } from './dto/item.dto';
@@ -27,8 +27,13 @@ export class AdminService {
     }
     return findItems;
   }
+
   async createItems(itemDTO: itemDTO) {
     const { name, price, description, image } = itemDTO;
+
+    if (isNaN(price)) {
+      throw new Error('Price must be a valid number');
+    }
 
     const fileName = `items/${Date.now()}-${name.replace(/\s+/g, '-')}.jpg`;
 
@@ -54,5 +59,13 @@ export class AdminService {
         Body: file,
       }),
     );
+  }
+  async modifyItem(id: ObjectId, newPrice: number) {
+    const item = await this.itemRepo.update(id, { price: newPrice });
+    if (!item) {
+      console.log('Item not found');
+      return null;
+    }
+    return { message: 'modified successfully' };
   }
 }

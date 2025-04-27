@@ -7,6 +7,7 @@ import {
   Post,
   UploadedFile,
   UseInterceptors,
+  Patch,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AdminService } from './admin.service';
@@ -45,5 +46,9 @@ export class AdminController {
       image: file.buffer, // assuming you want the file buffer
     };
     return this.adminService.createItems(itemDTO);
+  }
+  @Patch('changePrice')
+  changingItemPrice(@Body() id: any, price: number) {
+    return this.adminService.modifyItem(id, price);
   }
 }
