@@ -20,7 +20,7 @@ export class AdminService {
     private awsConfig: ConfigType<typeof awsS3Config>,
   ) {}
 
-  async getItems(itemDTO: itemDTO) {
+  async getItems() {
     const findItems = await this.itemRepo.find();
     if (findItems.length <= 0) {
       throw new BadRequestException('no items found');

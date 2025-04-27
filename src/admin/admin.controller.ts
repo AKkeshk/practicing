@@ -8,6 +8,7 @@ import {
   UploadedFile,
   UseInterceptors,
   Patch,
+  Get,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AdminService } from './admin.service';
@@ -48,7 +49,11 @@ export class AdminController {
     return this.adminService.createItems(itemDTO);
   }
   @Patch('changePrice')
-  changingItemPrice(@Body() id: any, price: number) {
-    return this.adminService.modifyItem(id, price);
+  async changingItemPrice(@Body() id: any, price: number) {
+    return await this.adminService.modifyItem(id, price);
+  }
+  @Get('getItems')
+  async getItems() {
+    return await this.adminService.getItems();
   }
 }
