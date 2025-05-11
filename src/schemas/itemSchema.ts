@@ -15,5 +15,5 @@ export class Item {
   description: string;
 
   @Column()
-  image: string;
+  image: Buffer;
 }

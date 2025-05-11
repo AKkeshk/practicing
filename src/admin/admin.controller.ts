@@ -42,9 +42,9 @@ export class AdminController {
   addItem(@UploadedFile() file: Express.Multer.File, @Body() body: any) {
     const itemDTO = {
       name: body.name,
-      price: body.price,
+      price: Number(body.price),
       description: body.description,
-      image: file.buffer, // assuming you want the file buffer
+      image: file?.buffer, // assuming you want the file buffer
     };
     return this.adminService.createItems(itemDTO);
   }
